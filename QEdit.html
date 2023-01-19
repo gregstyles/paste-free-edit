@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+ <head>
+ <meta charset="utf-8">
+ <title>QEdit by Greg Styles</title>
+
+
+ </head>
+<style>
+
+p {
+  font-size: 20px;
+}
+
+textarea {
+
+ font-size: 20pt;
+ font-family: 'Times';
+}
+</style>
+
+ <body  style="font-family:'Times'">
+ <div>
+<p>Cut, Copy, and Paste are disabled for this web page.</p>
+<p id="ymd"></p>
+
+<script>
+const d = new Date();
+
+document.getElementById("ymd").innerHTML = d;
+</script>
+
+<p>Write your answer in the box.</p>
+<p>When you are done, press cntrl-p and print/save as a pdf file to submit to the assignment.</p>
+ </div>
+
+  <script type="text/javascript">
+ $(document).ready(function() {
+ $('body').bind('cut copy paste', function(event) {
+ event.preventDefault();
+ document.oncontextmenu = new Function("return false");
+ });
+ });
+ </script>
+<p>
+ <textarea id="qeditbox" name="qeditbox" rows="60" cols="80" ></textarea>
+</p>
+ </body>
+</html>
