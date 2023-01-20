@@ -34,16 +34,17 @@ document.getElementById("ymd").innerHTML = d;
 <p>When you are done, press cntrl-p and print/save as a pdf file to submit to the assignment.</p>
  </div>
 
-  <script type="text/javascript">
- $(document).ready(function() {
- $('body').bind('cut copy paste', function(event) {
- event.preventDefault();
- document.oncontextmenu = new Function("return false");
- });
- });
- </script>
+
 <p>
  <textarea id="qeditbox" name="qeditbox" rows="60" cols="80" ></textarea>
+   <script type="text/javascript">
+
+  const pasteBox = document.getElementById("qeditbox");
+  pasteBox.onpaste = e => {
+    e.preventDefault();
+    return false;
+  };
+</script>
 </p>
  </body>
 </html>
