@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>no Paste Editor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+      // function to update the date and time
+      function updateDateTime() {
+        var now = new Date();
+        var dateTime = now.toLocaleString();
+        document.getElementById("dateTime").textContent = dateTime;
+      }
+      // update the date and time every second
+      setInterval(updateDateTime, 1000);
+      // function to prevent pasting
+      function preventPaste(event) {
+        event.preventDefault();
+      }
+      // disable pasting in the text box
+      window.addEventListener("DOMContentLoaded", function() {
+        var textBox = document.getElementById("textBox");
+        textBox.addEventListener("paste", preventPaste);
+      });
+      // function to save as PDF
+      function saveAsPDF() {
+        var options = {
+          filename: "noPasteEdit-" + new Date().toISOString().replace(/[:]/g, "-") + ".pdf",
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2 },
+          jsPDF: { format: 'letter', orientation: 'portrait' }
+        };
+        html2pdf().from(document.body).set(options).save();
+      }
+    </script>
+    <style>
+      #textBox {
+        width: 800px;
+        height: 1000px;
+        font-family: Times, serif;
+        font-size: 12pt;
+      }
+    </style>
+  </head>
+  <body onload="updateDateTime()">
+    <div>
+      <span id="dateTime"></span>
+    </div>
+    <button onclick="saveAsPDF()">Save as PDF</button>
+    <br><br>
+	<p>
+	Make sure your name is at the top of the page.  When you finnish the page, click Save as PDF.  Refreash the webpage to start a new page.
+	</p>
+    <textarea id="textBox"></textarea>
+  </body>
+</html>
